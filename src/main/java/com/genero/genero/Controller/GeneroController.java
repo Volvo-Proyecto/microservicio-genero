@@ -1,4 +1,4 @@
-package com.genero.Controller;
+package com.genero.genero.Controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +34,7 @@ public class GeneroController {
     public ResponseEntity<GeneroRespuestaDTO> obtenerporId(Long id){
         return ResponseEntity.ok(servicio.obtenerPorId(id));
     }
-    @PostMapping("/crear")
+    @PostMapping
     public ResponseEntity<GeneroRespuestaDTO> crear(@RequestBody GeneroPedidoDTO pedido) {
         GeneroRespuestaDTO creado = servicio.crear(pedido);
         return ResponseEntity.status(HttpStatus.CREATED).body(creado);
