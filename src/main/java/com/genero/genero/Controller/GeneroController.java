@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequestMapping("/api/generos")
+@RequestMapping("/api/v1/generos")
 @RequiredArgsConstructor
 public class GeneroController {
 
@@ -31,7 +31,7 @@ public class GeneroController {
         return ResponseEntity.ok(servicio.obtenerTodos());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<GeneroRespuestaDTO> obtenerporId(Long id){
+    public ResponseEntity<GeneroRespuestaDTO> obtenerporId(@PathVariable Long id){
         return ResponseEntity.ok(servicio.obtenerPorId(id));
     }
     @PostMapping
