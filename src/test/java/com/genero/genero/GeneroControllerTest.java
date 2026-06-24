@@ -27,13 +27,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class GeneroControllerTest {
 
     @Autowired
-    private MockMvc mockMvc; // Permite simular peticiones HTTP
+    private MockMvc mockMvc; 
 
     @MockBean
-    private GeneroService generoService; // Simulamos el servicio para no tocar la BD
+    private GeneroService generoService; 
 
     @Autowired
-    private ObjectMapper objectMapper; // Para convertir objetos Java a JSON
+    private ObjectMapper objectMapper; 
 
     private GeneroRespuestaDTO generoRespuesta;
     private GeneroPedidoDTO generoPedido;
