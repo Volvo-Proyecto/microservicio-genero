@@ -12,12 +12,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.web.server.ResponseStatusException;
+
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class) 
@@ -78,11 +79,11 @@ class GeneroServiceTest {
         when(repositorio.findById(99L)).thenReturn(Optional.empty());
 
         
-        ResponseStatusException ex = assertThrows(
-            ResponseStatusException.class,
+        RuntimeException ex = assertThrows(
+            RuntimeException.class,
             () -> servicio.obtenerPorId(99L)
         );
-        assertTrue(ex.getReason().contains("no encontrado"));
+        assertTrue(ex.getMessage().contains("no encontrado"));
     }
 
     @Test
@@ -106,11 +107,11 @@ class GeneroServiceTest {
         when(repositorio.findByNombre("RPG")).thenReturn(Optional.of(genero));
 
         
-        ResponseStatusException ex = assertThrows(
-            ResponseStatusException.class,
+        RuntimeException ex = assertThrows(
+            RuntimeException.class,
             () -> servicio.crear(pedido)
         );
-        assertTrue(ex.getReason().contains("Ya existe"));
+        assertTrue(ex.getMessage().contains("Ya existe"));
         verify(repositorio, never()).save(any()); 
     }
 
@@ -146,7 +147,7 @@ class GeneroServiceTest {
     void noDeberiaEliminarGeneroInexistente() {
         when(repositorio.existsById(99L)).thenReturn(false);
 
-        assertThrows(ResponseStatusException.class, () -> servicio.eliminar(99L));
-        verify(repositorio, never()).deleteById(any()); // nunca se llamó deleteById
+        assertThrows(RuntimeException.class, () -> servicio.eliminar(99L));
+        verify(repositorio, never()).deleteById(any()); 
     }
 }
